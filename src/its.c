@@ -92,13 +92,11 @@ its(void* data, size_t bitsize, uint8_t signedness, uint32_t encoding)
 		tmp = sign_extend(data, bitsize, bytesize);
 		negative = (tmp < 0);
 		integer = (uintmax_t)tmp;
-	} else {
+	} else
 		integer = zero_extend(data, bitsize, bytesize);
-	}
 
-	for (i = integer; i != 0; i /= (b->base)) {
+	for (i = integer; i != 0; i /= (b->base))
 		result[result_idx++] = b->digits[i % b->base];
-	}
 
 	if (b->base == 16 && encoding & ITS_UPPER_CASE)
 		for (i = 0; i < result_idx; i++)
@@ -111,9 +109,8 @@ its(void* data, size_t bitsize, uint8_t signedness, uint32_t encoding)
 			result[result_idx++] = '0';
 		}
 
-		if (b->base == 8) {
+		if (b->base == 8)
 			result[result_idx++] = '0';
-		}
 
 		if (b->base == 16) {
 			result[result_idx++] = 'x';
