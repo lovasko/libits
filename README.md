@@ -15,7 +15,7 @@ main(void)
 	char* a_str;
 
 	a = -123;
-	a_str = its(&a, sizeof(int), ITS_SIGNED, ITS_BASE_HEX | ITS_PREFIX);
+	a_str = its(&a, ITS_SIZE_INT, ITS_SIGNED, ITS_BASE_HEX | ITS_PREFIX);
 	printf("%s\n", a_str);
 	
 	free(a_str);
