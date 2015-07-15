@@ -18,7 +18,7 @@ strrev(char* string, size_t len)
 
 struct __its_base {
 	char* digits;
-	unsigned int base;
+	size_t base;
 };
 
 static intmax_t
