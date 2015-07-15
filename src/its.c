@@ -17,8 +17,8 @@ strrev(char* string, size_t len)
 }
 
 struct __its_base {
-	unsigned int base;
 	char* digits;
+	unsigned int base;
 };
 
 static intmax_t
@@ -34,7 +34,7 @@ sign_extend(void* data, size_t bitsize, size_t bytesize)
 		return result;
 
 	result &= ((intmax_t)1 << bitsize) - (intmax_t)1;
-	sign = result & ((intmax_t)1 << bitsize);
+	sign = !!(result & ((intmax_t)1 << bitsize));
 	if (sign)
 		result |= ((intmax_t)-1 << bitsize);
 	else
@@ -63,10 +63,10 @@ char*
 its(void* data, size_t bitsize, uint8_t signedness, uint32_t encoding)
 {
 	static struct __its_base bases[] = {
-		{ 16, "0123456789abcdef" },
-		{ 10, "0123456789" },
-		{  8, "01234567" },
-		{  2, "01" }
+		{ "0123456789abcdef", 16 },
+		{ "0123456789", 10 },
+		{ "01234567", 8 },
+		{ "01", 2 }
 	};
 
 	struct __its_base* b;
@@ -103,7 +103,7 @@ its(void* data, size_t bitsize, uint8_t signedness, uint32_t encoding)
 	if (b->base == 16 && encoding & ITS_UPPER_CASE)
 		for (i = 0; i < result_idx; i++)
 			if (isalpha(result[i]))
-				result[i] = toupper(result[i]);
+				result[i] = (char)toupper(result[i]);
 
 	if (encoding & ITS_PREFIX) {
 		if (b->base == 2) {
