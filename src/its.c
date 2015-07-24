@@ -95,6 +95,9 @@ its(void* data, size_t bitsize, uint8_t signedness, uint32_t encoding)
 	} else
 		integer = zero_extend(data, bitsize, bytesize);
 
+	if (integer == 0)
+		result[result_idx++] = '0';
+
 	for (i = integer; i != 0; i /= (b->base))
 		result[result_idx++] = b->digits[i % b->base];
 
