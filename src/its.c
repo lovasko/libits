@@ -17,7 +17,7 @@ strrev(char* string, size_t len)
 }
 
 struct __its_base {
-	char* digits;
+	const char* digits;
 	size_t base;
 };
 
